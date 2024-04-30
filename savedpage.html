@@ -1,0 +1,70 @@
+<html>
+<head>
+    <title>Save Page</title>
+    <style>
+        body {
+            background-color: #f2f2f2;
+        }
+        form {
+            margin: 50px auto;
+            width: 300px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        textarea {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 16px;
+            height: 200px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .error {
+            color: red;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <form id="saveForm">
+        <div class="error" id="error"></div>
+        <textarea id="content" name="content" placeholder="Please enter content."></textarea>
+        <input type="submit" value="Save">
+    </form>
+
+    <script>
+        var saveForm = document.getElementById("saveForm");
+        var error = document.getElementById("error");
+        var content = document.getElementById("content");
+
+        saveForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            if (content.value === "") {
+                error.innerHTML = "Please fill in all fields.";
+            } else {
+                localStorage.setItem("content", content.value);
+                alert("Successfully saved!");
+            }
+        });
+
+        content.value = localStorage.getItem("content");
+    </script>
+</body>
+</html>

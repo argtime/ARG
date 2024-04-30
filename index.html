@@ -1,0 +1,91 @@
+<html>
+<head>
+	<title>Login Page</title>
+	<style>
+		body {
+			background-color: #f2f2f2;
+		}
+		form {
+			margin: 50px auto;
+			width: 300px;
+			padding: 20px;
+			background-color: #fff;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+		}
+		input[type="text"], input[type="password"] {
+			padding: 10px;
+			margin-bottom: 20px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			width: 100%;
+			box-sizing: border-box;
+			font-size: 16px;
+		}
+		input[type="submit"] {
+			padding: 10px 20px;
+			background-color: #4CAF50;
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			font-size: 16px;
+		}
+		input[type="submit"]:hover {
+			background-color: #45a049;
+		}
+		.error {
+			color: red;
+			margin-bottom: 20px;
+		}
+	</style>
+</head>
+<body>
+	<form id="loginForm">
+		<div class="error" id="error"></div>
+		<label for="username">Username:</label>
+		<input type="text" id="username" name="username" placeholder="Enter your username">
+		<label for="password">Password:</label>
+		<div id="passwordContainer">
+			<input type="password" id="password" name="password" placeholder="Enter your password">
+			<div id="passwordOverlay"></div>
+		</div>
+		<input type="submit" value="Login">
+	</form>
+
+	<script>
+		var loginForm = document.getElementById("loginForm");
+		var error = document.getElementById("error");
+		var passwordContainer = document.getElementById("passwordContainer");
+		var passwordOverlay = document.getElementById("passwordOverlay");
+
+		loginForm.addEventListener("submit", function(event) {
+			event.preventDefault();
+
+			var username = document.getElementById("username").value;
+			var password = document.getElementById("password").value;
+
+			if (username === "Ryan H" && password === "3128") {
+				window.location.href = "savedpage.html";
+			} else if (username === "Guest" && password === "Test") {
+				window.location.href = "storage2.html";
+			} else {
+				error.innerHTML = "Incorrect username or password. Please try again.";
+			}
+		});
+
+		passwordContainer.addEventListener("mousemove", function(event) {
+			var rect = passwordContainer.getBoundingClientRect();
+			var x = event.clientX - rect.left;
+			var y = event.clientY - rect.top;
+
+			var gradient = "linear-gradient(to right, #4CAF50 " + x + "px, transparent " + x + "px)";
+			passwordOverlay.style.background = gradient;
+		});
+
+		passwordContainer.addEventListener("mouseleave", function(event) {
+			passwordOverlay.style.background = "transparent";
+		});
+	</script>
+</body>
+</html>
